@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Prueba{% endblock %}
+<h1>Live Mask Detection</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <script>
+        const video = document.getElementById('video');
+        const url = window.location.origin + '/live_mask_detection/';
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log('Error accessing camera:', error);
+                });
+        }
+
+        setInterval(() => {
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    video.src = URL.createObjectURL(blob);
+                })
+                .catch(error => {
+                    console.log('Error fetching video:', error);
+                });
+        }, 1000);
+    </script>
+{% block content %}
