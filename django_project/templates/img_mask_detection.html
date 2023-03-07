@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Deteccion desde imagen{% endblock %}
+
+{% block content %}
+
+<section class="bg-dark text-light d-flex py-4" style="min-height: calc(100vh - 66px);">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="mt-1" style="font-family: 'Tilt Warp', cursive;">Detección de Mascarilla</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="image">Imagen:</label>
+                    <input type="file" class="form-control-file" name="image" id="image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block mt-3" >Detectar Mascarilla</button>
+                </div>
+            </form>
+        </div>
+        <div class="row text-center d-flex mt-4">
+            <div class="col-md-6 bg-info px-1 pb-2">
+                <h2 style="font-family: 'Tilt Warp', cursive;">Vista Previa</h2>
+                <div class="d-flex justify-content-center">
+                    <img id="preview" src="#" alt="Vista previa de la imagen" style="display:none;max-width:100%;height:auto;">
+                </div>
+                
+            </div>
+            <div class="col-md-6 bg-success px-1 pb-2">
+                <h2 style="font-family: 'Tilt Warp', cursive;">Detecciones</h2>
+                <div id="result" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function previewImage() {
+        var preview = document.querySelector('#preview');
+        var file = document.querySelector('#image').files[0];
+        var reader = new FileReader();
+    
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+            preview.style.display = "block";
+        }, false);
+    
+        if (file) {
+            reader.readAsDataURL(file);
+            // Ocultar imagen previa si existe
+            if (preview.style.display === "block") {
+                preview.style.display = "none";
+            }
+            // Ocultar resultado previo si existe
+            var resultDiv = document.querySelector('#result');
+            resultDiv.style.display = "none";
+            resultDiv.innerHTML = "";
+        }
+    }
+    
+    var inputImage = document.querySelector('#image');
+    inputImage.addEventListener('change', previewImage);
+    
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.responseType = 'arraybuffer'; // se especifica que se va a recibir una imagen
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var resultDiv = document.querySelector('#result');
+                var blob = new Blob([xhr.response], { type: 'image/jpeg' }); // se especifica el tipo de imagen que se recibe
+                var imageURL = URL.createObjectURL(blob); // se crea una URL para la imagen
+                var image = new Image();
+                image.src = imageURL;
+                image.style.maxWidth = "100%"; // se establece el ancho máximo de la imagen
+                image.style.height = "auto"; // se establece la altura automática para mantener la proporción
+                resultDiv.appendChild(image); // se agrega la imagen al DOM
+                resultDiv.style.display = "block";
+            } else {
+                alert('Error en la detección de la máscara. Intente nuevamente');
+            }
+        };
+        xhr.send(formData);
+    });
+    
+    
+</script>
+
+
+{% endblock content %}

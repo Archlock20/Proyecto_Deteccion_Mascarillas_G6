@@ -8,14 +8,16 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600&display=swap" rel="stylesheet">
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.9); background: #5388ff;" >
       <div class="container-fluid px-5">
-        <a class="navbar-brand d-flex align-items-center" style="font-family: 'Archivo', sans-serif; font-weight: bold" href="{% url 'home' %}"><i class="fa-solid fa-mask-face fa-2x me-3" style="color: white;"></i>FMask Detector</a>
+        <a class="navbar-brand d-flex align-items-center" style="font-family: 'Tilt Warp', cursive;" href="{% url 'home' %}"><i class="fa-solid fa-mask-face fa-2x me-3" style="color: white;"></i>FMask Detector</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,12 +25,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a href="#" class="nav-link px-2 link-dark">+ Nuevo</a>
-            </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link dropdown-toggle btn btn-outline-primary text-white fw-bold" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">Bienvenido 
                 {{ user.username }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

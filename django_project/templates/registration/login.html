@@ -1,19 +1,20 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load static %}
 
 
-{% block title %}Login{% endblock %}
+{% block title %}Iniciar sesion{% endblock %}
 
 {% block content %}
-<section class="min-vh-100" style="background: linear-gradient(to bottom, #6C757D, #5885AF);">
+<section class="min-vh-100" style="background: linear-gradient(to bottom, #5388ff, #373b44);">
   <div class="container py-4">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col col-xl-10"> 
         <div class="card bg-dark" style="border-radius: 1rem;">
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+              <img src="{% static 'mask_login.jpg' %}"
                 alt="login form" class="img-fluid h-100" style="border-radius: 1rem 0 0 1rem;" />
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -22,11 +23,11 @@
                 <form method="post">
                   {% csrf_token %}
                   <div class="d-flex align-items-center mb-3 pb-1">
-                    <i class="fa-solid fa-mask-face fa-5x me-3" style="color: #5885AF;"></i>
-                    <span class="h1 fw-bold mb-0">Facemask Detector V.1.0</span>
+                    <i class="fa-solid fa-mask-face fa-5x me-3" style="color: #5388ff;"></i>
+                    <span class="h1 mb-0" style="font-family: 'Tilt Warp', cursive;">Facemask Detector V.1.0</span>
                   </div>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingrese a su cuenta</h5>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-family: 'Tilt Warp', cursive;">Ingrese a su cuenta</h5>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example17">Email o Usuario</label>
@@ -63,7 +64,7 @@
   </div>
 </section>
 
-<section>
+{% comment %} <section>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4 bg-primary text-white d-flex align-items-center justify-content-center">
@@ -107,20 +108,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 
 {% endblock %}
 
-
-{% comment %} {% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
-
-{% block content %}
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-{% endblock %} {% endcomment %}

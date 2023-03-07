@@ -1,36 +1,123 @@
 <!-- templates/home.html-->
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Cerrar Sesion</a></p>
+  
+<style>
+  .card:hover {
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+    }
+</style>
 
-  {% comment %}
-  <iframe src="{% url 'mask_detection_view' %}" frameborder="2" width="200px" height="200px">
-     <a href=""><button type="button" class="btn btn-danger my_button">funciona porfavor</button></a> 
-  </iframe>
-  {% endcomment %}
+  <section class="bg-dark text-light d-flex align-items-center py-1">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-7 d-flex justify-content-center">
+          <img src="{% static 'home_background.png' %}" alt="Hero Image" class="img-fluid rounded">
+        </div>
+        <div class="col-md-5 mb-4 mb-md-0">
+          <h1 class="display-4 mb-3 text-center" style="font-family: 'Tilt Warp', cursive;">Detector de mascarillas en tiempo real</h1>
+          <p class="lead mb-4">Este prototipo de deteccion de mascarillas en tiempo real es una solución tecnológica que utiliza visión artificial y aprendizaje automático para monitorear y controlar el uso de mascarillas en espacios públicos y privados.</p>
+          <div class="text-center">
+            <a href="{% url 'live_mask_detection' %}" class="btn btn-outline-primary btn-lg mt-1">Stream</a>
+            <a href="{% url 'img_mask_detection' %}" class="btn btn-outline-primary btn-lg mt-1">Imagen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-2" style="background: linear-gradient(to bottom, #212529, #6c757d);">
+    <div class="container">
+      <h1 class="display-5 text-center text-white" style="font-family: 'Tilt Warp', cursive;">Utilidades</h1>
+      <p class="lead text-white">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+      <p>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-center mb-4 box-shadow">
+            <img class="card-img-top bg-light"  alt="Thumbnail" style="height: 275px; width: 100%; display: block;" src="{% static 'hospital.png' %}" data-holder-rendered="true">
+            <div class="card-body">
+              <h5 style="font-family: 'Tilt Warp', cursive;">Hospitales</h5>
+              <p class="card-text">
+                Reduce el riesgo de infección en pacientes vulnerables y en el personal médico que trabaja en contacto cercano con ellos. Contribuye a la prevención de futuras infecciones y pandemias al reducir la transmisión del virus</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="https://www.buckshealthcare.nhs.uk/pifs/the-importance-of-wearing-a-surgical-mask-while-in-hospital/" target="_blank" class="btn btn-sm btn-primary">Articulo</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center mb-4 box-shadow">
+            <img class="card-img-top bg-light" alt="Thumbnail" style="height: 275px; width: 100%; display: block;" src="{% static 'mall.png' %}" data-holder-rendered="true">
+            <div class="card-body">
+              <h5 style="font-family: 'Tilt Warp', cursive;">Supermercados</h5>
+              <p class="card-text">
+                El uso de mascarillas en los supermercados es vital para prevenir la propagación del virus entre clientes y empleados, proteger la salud personal, mantener los supermercados abiertos y contribuir a prevenir futuras infecciones y pandemias.
+              </p>
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="https://www.goodhousekeeping.com/health/wellness/a32038711/should-i-wear-face-masks-to-grocery-stores-coronavirus/" target="_blank" class="btn btn-sm btn-primary">Articulo</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center mb-4 box-shadow">
+            <img class="card-img-top bg-light" alt="Thumbnail" style="height: 275px; width: 100%; display: block;" src="{% static 'escuela.png' %}" data-holder-rendered="true">
+            <div class="card-body">
+              <h5 style="font-family: 'Tilt Warp', cursive;">Escuelas</h5>
+              <p class="card-text">Ayuda a prevenir la propagación del virus entre estudiantes, personal educativo y sus familias. Reduce el riesgo de infección en estudiantes y personal educativo. Ayuda a mantener las escuelas abiertas al evitar brotes y la necesidad de cierres</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="https://www.medtecs.com/benefits-of-children-wearing-masks-in-school/" target="_blank" class="btn btn-sm btn-primary">Articulo</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% comment %}   <p><a href="{% url 'logout' %}">Cerrar Sesion</a></p>
+  <p><a href="{% url 'live_mask_detection' %}">Deteccion en tiempo real</a></p> {% endcomment %}
+
 {% else %}
 
 <section class="bg-dark text-light d-flex align-items-center py-5" style="min-height: calc(100vh - 66px);">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-6 mb-4 mb-md-0">
-        <h1 class="display-4 mb-3">Real time Face Mask Detector</h1>
-        <p class="lead mb-4">El sistema de detección de mascarillas en tiempo real es una solución tecnológica que utiliza visión artificial y aprendizaje automático para monitorear y controlar el uso de mascarillas en espacios públicos y privados.</p>
-        <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Inicia Sesion</a>
-        <a href="{% url 'signup' %}" class="btn btn-outline-primary btn-lg">Registrate</a>
-        <a href="{% url 'password_reset' %}" class="btn btn-outline-primary btn-lg">Recupera pass.</a>
+        <h1 class="display-4 mb-3 text-center" style="font-family: 'Tilt Warp', cursive;">Detector de mascarillas en tiempo real</h1>
+        <p class="lead mb-4">Este prototipo de deteccion de mascarillas en tiempo real es una solución tecnológica que utiliza visión artificial y aprendizaje automático para monitorear y controlar el uso de mascarillas en espacios públicos y privados.</p>
+        <div class="text-center">
+        <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg mt-1">Inicia Sesion</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-primary btn-lg mt-1">Registrate</a>
+        <a href="{% url 'password_reset' %}" class="btn btn-outline-primary btn-lg mt-1">Recupera pass.</a>
+        </div>
       </div>
       <div class="col-md-6 d-flex justify-content-center">
-        <img src="https://www.invixium.com/wp-content/uploads/2022/01/mask-detection-with-tface-access-control.png" alt="Hero Image" class="img-fluid rounded">
+        <img src="{% static 'aaa.png' %}" alt="Hero Image" class="img-fluid rounded">
+        {% comment %} https://www.invixium.com/wp-content/uploads/2022/01/mask-detection-with-tface-access-control.png {% endcomment %}
       </div>
     </div>
   </div>
 </section>
+
 
 {% endif %}
 {% endblock %}
